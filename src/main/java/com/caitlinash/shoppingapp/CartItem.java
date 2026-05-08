@@ -6,11 +6,11 @@ package com.caitlinash.shoppingapp;
 
 public class CartItem {
 	Item item;
-	Integer quanitity;
+	Integer quantity;
 
 	CartItem(Item item, Integer quantity) {
 		this.item = item;
-		this.quanitity = quantity;
+		this.quantity = quantity;
 	}
 	
 }
