@@ -20,7 +20,7 @@ public class App {
 		String shipping = "";
 
 		String itemName = "";
-		String quantity = "";
+		int itemQuantity = 0;
 
 		List<CartItem> cartItems = new ArrayList<>();
 
@@ -57,8 +57,13 @@ public class App {
 		System.out.println("--------------");
 
 		for (Item i : catalogue) {
-			System.out.println("Item Name: " + i.name + " Item Price: " + i.price);
+			System.out.println(
+				i.name + 
+				" | $" + i.price
+			);
 		}
+
+		System.out.println();
 
 		System.out.println("-------------------");
 
@@ -67,14 +72,14 @@ public class App {
 			System.out.println("Please enter your name: ");
 			name = scanner.nextLine();
 
-			System.out.println("Please enter your state of residence: ");
+			System.out.println("Please enter your state of residence (for example MO): ");
 			state = scanner.nextLine();
 
 			System.out.println("Please enter the item to be purchased: ");
 			itemName = scanner.nextLine();
 
 			System.out.println("Please enter the quantity of items to be purchased: ");
-			quantity = scanner.nextLine();
+			itemQuantity = Integer.parseInt(scanner.nextLine());
 
 			System.out.println("Please enter either \\\"standard\\\" or \\\"next day\\\" shipping: ");
 			shipping = scanner.nextLine();
@@ -85,7 +90,7 @@ public class App {
 			System.out.println("Name: " + name);
 			System.out.println("State of Residence: " + state);
 			System.out.println("Items to be purchased: " + itemName);
-			System.out.println("Quantity of items: " + quantity);
+			System.out.println("Quantity of items: " + itemQuantity);
 			System.out.println("Shipping: " + shipping + " shipping");
 
 			System.out.println();
@@ -109,7 +114,6 @@ public class App {
 			}
 		}
 		
-		int itemQuantity = Integer.parseInt(quantity);
 		cart.addToCart(cartItem, itemQuantity);
 
 		// let user interact with cart/items
@@ -127,6 +131,7 @@ public class App {
 
 		System.out.println("Please select what to do next from the options above (enter number): ");
 		String option = scanner.nextLine();
+		System.out.println();
 
 		while (!option.equalsIgnoreCase("7")) {
 			// switch statement and handle exit
@@ -135,13 +140,15 @@ public class App {
 				// add item
 				String addItem = "";
 				Item foundItem = null;
-				String addItemQuantity = "";
+				int addItemQuantity;
 
+				System.out.println();
 				System.out.println("Please enter the name of the item to be added: ");
 				addItem = scanner.nextLine();
 
+				System.out.println();
 				System.out.println("Please enter the quantity of this item to be added: ");
-				addItemQuantity = scanner.nextLine();
+				addItemQuantity = Integer.parseInt(scanner.nextLine());
 
 				for (Item i : catalogue) {
 					if (addItem.equals(i.name)) {
@@ -149,34 +156,35 @@ public class App {
 					}
 				}
 
-				int newItemQuantity = Integer.parseInt(addItemQuantity);
-
 				if (foundItem != null) {
-					cart.addToCart(foundItem, newItemQuantity);
+					cart.addToCart(foundItem, addItemQuantity);
 				}
 
 				break;
 			case "2":
 				// get current total
-				System.out.println("Subtotal: $" + cart.getSubtotal());
-
-				System.out.println("Tax: $" + cart.getTax());
-
-				System.out.println(
-					"Shipping: $" + cart.getShippingCost()
-				);
-
-				System.out.println(
-					"Current Total: $" + cart.getTotal()
-				);
+				System.out.println();
+				System.out.printf("Subtotal: $%.2f", cart.getSubtotal());
+				System.out.println();
+				System.out.printf("Tax: $%.2f", cart.getTax());
+				System.out.println();
+				System.out.printf("Shipping: $%.2f", cart.getShippingCost());
+				System.out.println();
+				System.out.printf("Current Total: $%.2f", cart.getTotal());
+				System.out.println();
 
 				break;
 			case "3":
 				// checkout
 				cart.checkout();
+				System.out.println();
 				System.out.println("Transaction completed!");
 
-				break;
+				System.out.println();
+				System.out.println("Goodbye! :p");
+				System.out.println();
+
+				return;
 			case "4":
 				// see contents
 				cart.getContents();
@@ -184,12 +192,25 @@ public class App {
 				break;
 			case "5":
 				// edit quantity
+				String editItem = "";
+				int editQuantity;
+
+				System.out.println();
+				System.out.println("Please enter the item you would like to edit: ");
+				editItem = scanner.nextLine();
+
+				System.out.println();
+				System.out.println("Please enter the new quantity: ");
+				editQuantity = Integer.parseInt(scanner.nextLine());
+
+				cart.editItemQuantity(editItem, editQuantity);
 
 				break;
 			case "6":
 				// remove item
 				String removeItem = "";
 
+				System.out.println();
 				System.out.println("Please enter the name of the item to be removed: ");
 				removeItem = scanner.nextLine();
 
@@ -200,11 +221,13 @@ public class App {
 			System.out.println();
 			System.out.println("Please select another option: ");
 			option = scanner.nextLine();
+			System.out.println();
 		}
 
 		// exit out of the program
 		System.out.println();
 		System.out.println("Goodbye! :p");
+		System.out.println();
 
 		scanner.close();
 	}
