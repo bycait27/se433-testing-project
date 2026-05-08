@@ -27,7 +27,7 @@ git clone git@github.com:bycait27/se433-testing-project.git
 **Navigate to the project directory:**
 
 ```bash
-cd src/main/java/com/caitlinash/shoppingapp
+cd se433-testing-project
 ```
 
 **Package, compile, and run with Maven:**
