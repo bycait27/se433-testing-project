@@ -38,11 +38,32 @@ mvn clean compile
 mvn exec:java -Dexec.mainClass="com.caitlinash.shoppingapp.App"
 ```
 
+## How to Test
+
+**Navigate to the project directory:**
+
+```bash
+cd se433-testing-project
+```
+
+**Run test suite with Maven:**
+
+```bash
+mvn clean test
+```
+
+**Run Pit Mutation Testing and check coverage results:**
+
+```bash
+mvn org.pitest:pitest-maven:mutationCoverage
+open target/pit-reports/index.html  
+```
+
 ## Taxes and Shipping 
 
 IL, CA, and NY require a sales tax of 6%. All other states have no tax.
 
-"standard" and "next day" shipping are offered. Standard shipping costs $10, but is free if the user purchases over $50 worth of items. Next day shipping costs $25 no matter what.
+"standard" and "next day" shipping are offered. Standard shipping costs 10 dollars, but is free if the user purchases over 50 dollars worth of items. Next day shipping costs 25 dollars no matter what.
 
 ## License 
 
