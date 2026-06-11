@@ -104,7 +104,7 @@ public class App {
 		User user = new User(name, state, shipping);
 
 		// create ShoppingCart with user items
-		ShoppingCart cart = new ShoppingCart(user, cartItems);
+		ShoppingCart cart = new ShoppingCart(user);
 
 		Item cartItem = null;
 
