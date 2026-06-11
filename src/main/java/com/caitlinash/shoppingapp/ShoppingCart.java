@@ -1,18 +1,19 @@
 package com.caitlinash.shoppingapp;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /*
  * ShoppingCart Class provides methods for interacting with the cart
  */
 
-class ShoppingCart {
+public class ShoppingCart {
 	User user;
 	List<CartItem> items;
 
-	ShoppingCart(User user, List<CartItem> items) {
+	public ShoppingCart(User user) {
 		this.user = user;
-		this.items = items;
+		this.items = new ArrayList<>();
 	}
 
 	// method add items
@@ -44,6 +45,16 @@ class ShoppingCart {
 				" | Price: $" + i.item.price
 			);
         }
+	}
+
+	// check if cart contains an item
+	public boolean containsItem(String itemName) {
+		for (CartItem i : items) {
+			if (i.item.name.equals(itemName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	// method edit quantity of an item
@@ -141,7 +152,7 @@ class ShoppingCart {
 		double shipping = getShippingCost();
 		double total = subtotal + tax + shipping;
 
-		if (total >= 1 && total < 99999.99) {
+		if (total >= 1 && total <= 99999.99) {
 			System.out.printf("Subtotal: $%.2f", subtotal);
 			System.out.println();
 			System.out.printf("Tax: $%.2f", tax);
